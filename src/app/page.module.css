@@ -1,0 +1,87 @@
+.container {
+    min-height: 100vh;
+  }
+  
+  .main {
+    padding: 20px;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    margin-bottom: 40px;
+    color: black
+  }
+  
+  .projects {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .section {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 20px;
+  }
+
+  .projectCard {
+    position: relative;
+    background: rgba(31, 41, 55, 0.5);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+  }
+
+  .projectCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1);
+  }
+
+  .projectImage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  }
+
+  .projectImage img {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+
+  .projectInfo {
+    padding: 1.5rem;
+  }
+
+  .techTag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    background: rgba(55, 65, 81, 0.5);
+    color: rgb(209, 213, 219);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  .projectCard:hover .techTag {
+    background: rgba(75, 85, 99, 0.5);
+    border-color: rgba(107, 114, 128, 0.5);
+  }
