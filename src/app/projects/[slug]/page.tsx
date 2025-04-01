@@ -8,6 +8,9 @@ import { Metadata, Viewport } from 'next';
 export const dynamic = 'force-static';
 export const revalidate = 3600; // revalidate every hour
 
+// Transparent 1x1 pixel PNG base64
+const TRANSPARENT_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8=';
+
 // This would typically come from a database or CMS
 type Project = {
   slug: string;
@@ -51,7 +54,7 @@ Project Context:
     slug: 'inventory-manager',
     title: 'Inventory Manager',
     description: 'A comprehensive inventory management system for tracking and managing stock levels.',
-    imageUrl: '/images/inventory-manager.png',
+    imageUrl: TRANSPARENT_IMAGE,
     link: 'https://inventory-manager.vercel.app/',
     technologies: ['React', 'Node.js', 'MySql', 'Express'],
     longDescription: `A comprehensive inventory management system designed for tracking and managing stock levels.
@@ -263,50 +266,55 @@ export default async function ProjectPage({
         <div className={`${styles.projectImage} group relative overflow-hidden rounded-xl`}>
           <div className="relative w-full h-full">
             <Image 
-              src={project.imageUrl} 
+              src={project.imageUrl || TRANSPARENT_IMAGE}
               alt={project.title}
               width={1200}
               height={675}
               className="w-full rounded-xl shadow-2xl transition-all duration-150"
               priority
             />
-            {/* Permanent video indicator */}
-            <div className="absolute top-4 right-4 bg-black/50 px-3 py-1.5 rounded-full flex items-center gap-2 text-sm text-white/90">
-              <svg 
-                className="w-4 h-4" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-              <span>Hover to preview</span>
-            </div>
-            {/* Video placeholder overlay */}
-            <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col items-center justify-center">
-              <div className="p-4 text-center">
-                <svg 
-                  className="w-12 h-12 text-white/90 mb-2 mx-auto" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                  />
-                </svg>
-                <p className="text-white/90 text-lg font-medium">Demo Video</p>
-                <p className="text-white/70 text-sm">Coming Soon</p>
-              </div>
-            </div>
+            {/* Only show video indicator if there's a real image */}
+            {project.imageUrl && project.imageUrl !== TRANSPARENT_IMAGE && (
+              <>
+                {/* Permanent video indicator */}
+                <div className="absolute top-4 right-4 bg-black/50 px-3 py-1.5 rounded-full flex items-center gap-2 text-sm text-white/90">
+                  <svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>Hover to preview</span>
+                </div>
+                {/* Video placeholder overlay */}
+                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col items-center justify-center">
+                  <div className="p-4 text-center">
+                    <svg 
+                      className="w-12 h-12 text-white/90 mb-2 mx-auto" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <p className="text-white text-lg font-medium">Demo Video</p>
+                    <p className="text-white/80 text-sm">Coming Soon</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 

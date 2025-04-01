@@ -4,6 +4,9 @@ import Header from './components/Header';
 import styles from './page.module.css';
 import { Metadata } from 'next';
 
+// Transparent 1x1 pixel PNG base64
+const TRANSPARENT_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8=';
+
 export const metadata: Metadata = {
   title: "Edward's Portfolio | Full Stack Developer",
   description: 'Full Stack Developer specializing in modern web technologies, building innovative solutions with React, TypeScript, and more.',
@@ -73,7 +76,7 @@ const projects = [
     slug: 'inventory-manager',
     title: 'Inventory Manager',
     description: 'A comprehensive inventory management system for tracking and managing stock levels.',
-    imageUrl: '/images/inventory-manager.png',
+    imageUrl: TRANSPARENT_IMAGE,
     link: 'https://inventory-manager.vercel.app/',
     technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
     projectType: 'freelance'
@@ -118,7 +121,7 @@ const projects = [
     slug: 'macro-counter',
     title: 'Macro Counter',
     description: 'A nutrition tracking application for counting macros and managing dietary goals.',
-    imageUrl: '/images/macro-counter.png',
+    imageUrl: TRANSPARENT_IMAGE,
     link: 'https://macro-counter.vercel.app/',
     technologies: ['React', 'TypeScript', 'Tailwind CSS'],
     projectType: 'personal'
