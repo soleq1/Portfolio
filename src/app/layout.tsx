@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,9 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ecodeportfolio.vercel.app'),
   title: "Edward's Portfolio | Full Stack Developer",
-  description: "Full Stack Developer specializing in modern web technologies, building innovative solutions with React, TypeScript, and more.",
+  description: "Full Stack Developer specializing in modern web technologies.",
   keywords: [
     'Full Stack Developer',
     'Web Development',
@@ -27,7 +34,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Edward's Portfolio | Full Stack Developer",
     description: "Full Stack Developer specializing in modern web technologies.",
-    url: 'https://portfolio.edward.com',
     siteName: "Edward's Portfolio",
     locale: 'en_US',
     type: 'website',
@@ -42,11 +48,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
   },
 };
 

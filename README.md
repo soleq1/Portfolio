@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Edward's Portfolio
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Stack**: Built with Next.js 14, TypeScript, and Tailwind CSS
+- **Responsive Design**: Mobile-first approach with a modern, clean interface
+- **Project Showcase**: Dynamic project pages with detailed information
+- **SEO Optimized**: Includes metadata, OpenGraph, and Twitter cards
+- **Performance Focused**: Fast page loads and smooth transitions
+- **Dark Mode**: Sleek dark theme with glassmorphism effects
+
+## 🛠️ Technologies Used
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Fonts**: Geist Sans & Geist Mono
+- **Deployment**: Vercel
+
+## 📂 Project Structure
+
+```
+fastportfolio/
+├── src/
+│   ├── app/
+│   │   ├── components/     # Reusable components
+│   │   ├── projects/       # Project pages
+│   │   ├── page.tsx       # Home page
+│   │   └── layout.tsx     # Root layout
+│   └── public/
+│       └── images/        # Project images
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Setup & Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd fastportfolio
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📱 Features Showcase
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Projects Section
+- Work Experience & Freelance Projects
+- Personal Projects
+- Interactive project cards
+- Detailed project pages with tech stack
 
-## Deploy on Vercel
+### Project Pages
+- Project descriptions
+- Technology tags
+- Live demo links
+- Video preview placeholders
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Responsive Navigation
+- Mobile-friendly hamburger menu
+- Smooth transitions
+- Section links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 SEO & Metadata
+
+- OpenGraph tags for social sharing
+- Twitter cards
+- Google bot optimization
+- Proper meta descriptions
+- Keyword optimization
+
+## 📝 Project Details
+
+### Featured Projects
+1. **Form Response**
+   - Next.js, TypeScript, Tailwind CSS
+   - Mock interview feedback system
+
+2. **Bro Lifts**
+   - React, Tailwind CSS
+   - Fitness tracking application
+
+3. **Gorilla Type**
+   - React, TypeScript, Tailwind CSS
+   - Typing speed test application
+
+4. **Poker Bot**
+   - Python, TensorFlow
+   - AI-powered poker game
+
+5. **Fun Facts Extension**
+   - JavaScript
+   - Chrome browser extension
+
+## 🚀 Deployment
+
+The project is configured for deployment on Vercel:
+
+1. Push to GitHub
+2. Connect to Vercel
+3. Automatic deployments on push
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👤 Contact
+
+Edward - [Portfolio](https://portfolio.edward.com)
+
+---
+
+Built with ❤️ using Next.js and Tailwind CSS

@@ -1,8 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../../components/Header';
+import ProjectLink from '../../components/ProjectLink';
 import styles from './ProjectPage.module.css';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata, Viewport } from 'next';
+
+export const dynamic = 'force-static';
+export const revalidate = 3600; // revalidate every hour
 
 // This would typically come from a database or CMS
 type Project = {
@@ -10,7 +14,6 @@ type Project = {
   title: string;
   description: string;
   imageUrl: string;
-  videoUrl?: string; // Optional video URL for hover preview
   link: string;
   technologies: string[];
   longDescription: string;
@@ -148,15 +151,17 @@ Key Features:
   }
 ];
 
-type Props = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const project = projects.find(p => p.slug === params.slug);
   
   if (!project) {
@@ -166,9 +171,8 @@ export async function generateMetadata(
     }
   }
 
-  const previousImages = (await parent).openGraph?.images || []
-
   return {
+    metadataBase: new URL('https://ecodeportfolio.vercel.app'),
     title: `${project.title} | Edward's Portfolio`,
     description: project.description,
     keywords: [
@@ -182,9 +186,9 @@ export async function generateMetadata(
     openGraph: {
       title: `${project.title} | Edward's Portfolio`,
       description: project.description,
-      images: [project.imageUrl, ...previousImages],
+      images: [project.imageUrl],
       type: 'website',
-      url: `https://portfolio.edward.com/projects/${project.slug}`,
+      url: `https://ecodeportfolio.vercel.app/projects/${project.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -192,31 +196,20 @@ export async function generateMetadata(
       description: project.description,
       images: [project.imageUrl],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    alternates: {
-      canonical: `https://portfolio.edward.com/projects/${project.slug}`,
-    },
   }
 }
 
-// Generate static paths for all projects
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const project = projects.find(p => p.slug === params.slug);
 
   if (!project) {
@@ -226,15 +219,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <main className="max-w-5xl mx-auto py-12 px-6">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
           <p className="text-gray-400">The project you&apos;re looking for doesn&apos;t exist.</p>
+          <Link href="/" className="text-blue-400 hover:text-blue-300 mt-4 inline-block">
+            ← Back to Home
+          </Link>
         </main>
       </div>
     );
   }
-
-  // Split the long description into paragraphs and bullet points
-  const descriptionParts = project.longDescription.split('\n\n');
-  const mainDescription = descriptionParts[0];
-  const bulletPoints = descriptionParts.slice(1).join('\n\n').split('\n').filter(line => line.trim().startsWith('•'));
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
@@ -246,7 +237,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             className="inline-flex items-center text-gray-400 hover:text-white transition-colors group"
           >
             <svg 
-              className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+              className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-150" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -263,18 +254,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div className={styles.projectHeader}>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
-              {project.title}
-            </h1>
-            <span className={`px-3 py-1 rounded-full text-sm ${
-              project.projectType === 'freelance' 
-                ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' 
-                : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-            }`}>
-              {project.projectType === 'freelance' ? 'Freelance' : 'Personal'}
-            </span>
-          </div>
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+            {project.title}
+          </h1>
           <p className="text-xl text-gray-300 mb-8">{project.description}</p>
         </div>
 
@@ -343,34 +325,30 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <div className={styles.description}>
             <h2 className="text-2xl font-semibold mb-4 text-gray-200">Project Details</h2>
             <div className="prose prose-invert">
-              <p className="mb-6 text-gray-300">{mainDescription}</p>
-              {bulletPoints.length > 0 && (
-                <ul>
-                  {bulletPoints.map((point, index) => (
-                    <li key={index}>{point.replace('•', '').trim()}</li>
-                  ))}
-                </ul>
-              )}
+              {project.longDescription.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="mb-4">{paragraph}</p>
+              ))}
             </div>
           </div>
 
           <div className={styles.links}>
             {project.link && (
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-green-500/20"
-              >
-                View Live Project
-              </a>
+              <ProjectLink
+                href={project.link}
+                isDisabled={project.slug === 'macro-counter'}
+                className={`${
+                  project.slug === 'macro-counter'
+                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700'
+                } px-6 py-2 rounded-xl transition-all shadow-lg`}
+              />
             )}
             {project.githubLink && (
               <a 
                 href={project.githubLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-6 py-2 rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all shadow-lg hover:shadow-gray-500/20"
+                className="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-6 py-2 rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all shadow-lg"
               >
                 View on GitHub
               </a>
