@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Edward's Portfolio | Full Stack Developer",
     description: 'Full Stack Developer specializing in modern web technologies, building innovative solutions with React, TypeScript, and more.',
-    url: 'https://portfolio.edward.com',
+    url: 'https://ecode-psi.vercel.app/',
     siteName: "Edward's Portfolio",
     images: [
       {
@@ -57,12 +57,21 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://portfolio.edward.com',
+    canonical: 'https://ecode-psi.vercel.app/',
   },
 };
 
 // This would typically come from a database or CMS
 const projects = [
+  {
+    slug: 'inventory-manager',
+    title: 'Inventory Manager (Contracted)',
+    description: 'A comprehensive inventory management system for tracking and managing stock levels.',
+    imageUrl: TRANSPARENT_IMAGE,
+    link: 'https://inventory-manager.vercel.app/',
+    technologies: ['React', 'Node.js', 'MySQL', 'Express'],
+    projectType: 'freelance'
+  },
   {
     slug: 'form-response',
     title: 'Form Response',
@@ -70,15 +79,6 @@ const projects = [
     imageUrl: '/images/FormResponse.png',
     link: 'https://formresponse.vercel.app/',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    projectType: 'freelance'
-  },
-  {
-    slug: 'inventory-manager',
-    title: 'Inventory Manager',
-    description: 'A comprehensive inventory management system for tracking and managing stock levels.',
-    imageUrl: TRANSPARENT_IMAGE,
-    link: 'https://inventory-manager.vercel.app/',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
     projectType: 'freelance'
   },
   {

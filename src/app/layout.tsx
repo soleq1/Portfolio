@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ecodeportfolio.vercel.app'),
+  metadataBase: new URL('https://ecode-psi.vercel.app/'),
   title: "Edward's Portfolio | Full Stack Developer",
   description: "Full Stack Developer specializing in modern web technologies.",
   keywords: [

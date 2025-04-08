@@ -47,7 +47,7 @@ Project Context:
 • Used for mock interview practice sessions
 • Facilitates structured feedback collection
 • Helps students track their interview preparation progress`,
-    githubLink: 'https://github.com/yourusername/form-response',
+    githubLink: 'https://github.com/soleq1/FormResponse',
     projectType: 'freelance'
   },
   {
@@ -55,7 +55,7 @@ Project Context:
     title: 'Inventory Manager',
     description: 'A comprehensive inventory management system for tracking and managing stock levels.',
     imageUrl: TRANSPARENT_IMAGE,
-    link: 'https://inventory-manager.vercel.app/',
+    link: '',
     technologies: ['React', 'Node.js', 'MySql', 'Express'],
     longDescription: `A comprehensive inventory management system designed for tracking and managing stock levels.
 
@@ -99,7 +99,8 @@ Key Features:
 • Multiple difficulty levels
 • Custom text options
 • Progress tracking`,
-    projectType: 'personal'
+    projectType: 'personal',
+    githubLink: 'https://github.com/soleq1/GorillaType' 
   },
   {
     slug: 'poker-bot',
@@ -165,7 +166,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const project = projects.find(p => p.slug === params.slug);
+  // Await the params to ensure they're available
+  const slug = await Promise.resolve(params.slug);
+  const project = projects.find(p => p.slug === slug);
   
   if (!project) {
     return {
@@ -213,7 +216,9 @@ export default async function ProjectPage({
 }: {
   params: { slug: string }
 }) {
-  const project = projects.find(p => p.slug === params.slug);
+  // Await the params to ensure they're available
+  const slug = await Promise.resolve(params.slug);
+  const project = projects.find(p => p.slug === slug);
 
   if (!project) {
     return (
