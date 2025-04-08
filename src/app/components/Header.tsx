@@ -22,7 +22,7 @@ export default function Header() {
             <Link href="#projects" className="text-gray-300 hover:text-white transition-colors">
               Projects
             </Link>
-            <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="mailto:edward.zie01@gmail.com" className="text-gray-300 hover:text-white transition-colors">
               Contact
             </Link>
           </nav>
