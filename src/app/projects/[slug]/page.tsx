@@ -54,7 +54,7 @@ Project Context:
     slug: 'inventory-manager',
     title: 'Inventory Manager',
     description: 'A comprehensive inventory management system for tracking and managing stock levels.',
-    imageUrl: TRANSPARENT_IMAGE,
+    imageUrl: '/images/inventory-manager.png',
     link: 'https://inventory-manager.vercel.app/',
     technologies: ['React', 'Node.js', 'MySql', 'Express'],
     longDescription: `A comprehensive inventory management system designed for tracking and managing stock levels.

@@ -77,7 +77,7 @@ const projects = [
     title: 'Inventory Manager',
     description: 'A comprehensive inventory management system for tracking and managing stock levels.',
     imageUrl: TRANSPARENT_IMAGE,
-    link: 'https://inventory-manager.vercel.app/',
+    link: '',
     technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
     projectType: 'freelance'
   },
@@ -121,7 +121,7 @@ const projects = [
     slug: 'macro-counter',
     title: 'Macro Counter',
     description: 'A nutrition tracking application for counting macros and managing dietary goals.',
-    imageUrl: TRANSPARENT_IMAGE,
+    imageUrl: '/images/macro-counter.png',
     link: 'https://macro-counter.vercel.app/',
     technologies: ['React', 'TypeScript', 'Tailwind CSS'],
     projectType: 'personal'
@@ -156,34 +156,47 @@ export default function Home() {
             Professional Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {freelanceProjects.map((project) => (
-              <Link 
-                key={project.slug} 
-                href={`/projects/${project.slug}`}
-                className={styles.projectCard}
-              >
-                <div className={styles.projectImage}>
-                  <Image 
-                    src={project.imageUrl} 
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
-                </div>
-                <div className={styles.projectInfo}>
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                      <span key={index} className={styles.techTag}>
-                        {tech}
-                      </span>
-                    ))}
+            {freelanceProjects.map((project) => {
+              const inner = (
+                <>
+                  <div className={styles.projectImage}>
+                    <Image
+                      src={project.imageUrl}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
                   </div>
+                  <div className={styles.projectInfo}>
+                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                    <p className="text-gray-400 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, index) => (
+                        <span key={index} className={styles.techTag}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              );
+              return project.link ? (
+                <a
+                  key={project.slug}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectCard}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={project.slug} className={`${styles.projectCard} pointer-events-none`}>
+                  {inner}
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
 
